@@ -6,27 +6,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 </head>
 <body>
-<h3>List of book</h3>
+<h3 class="container centr">List of book</h3>
 <table class="centered">
     <thead>
     <tr>
         <th>name</th>
         <th>author</th>
+        <th>edit</th>
+        <th>show</th>
+        <th>update</th>
     </tr>
     </thead>
     <tbody>
         <tr th:each="book: ${books}">
             <td th:text="${book.name}"/>
             <td th:text="${book.author}"/>
+            <td><a href="" th:href="@{'/' + ${book.id} + '/show'}">SHOW</a></td>
+            <td><a href="" th:href="@{'/' + ${book.id} + '/edit'}">EDIT</a></td>
+            <td><a href="" th:href="@{'/' + ${book.id} + '/delete'}">DELETE</a></td>
         </tr>
     </tbody>
 </table>
-
-<form action="#" th:action="@{/}" th:object="${newbook}" method="post">
-    <p>name:<input type="text" th:field="*{name}"></p>
-    <p>author:<input type="text" th:field="*{author}"></p>
-    <p><input type="submit" value="add"><input type="reset" value="reset"></p>
-</form>
-
+<div class="container centr">
+    <form action="#" th:action="@{/}" th:object="${newbook}" method="post">
+        <p>name:<input type="text" th:field="*{name}"></p>
+        <p>author:<input type="text" th:field="*{author}"></p>
+        <p><input type="submit" class="btn btn-primary" value="add">
+            <input type="reset" class="btn btn-primary" value="reset"></p>
+    </form>
+</div>
 </body>
 </html>

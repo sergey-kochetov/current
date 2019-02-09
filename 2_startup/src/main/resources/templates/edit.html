@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<h3 class="container centr">Edit of book</h3>
+<div class="container centr">
+    <form action="#" th:action="@{'/'+${book.id}}" th:object="${book}" method="post">
+        <p>name:<input type="text" th:field="*{name}"></p>
+        <p>author:<input type="text" th:field="*{author}"></p>
+        <p><input type="submit" class="btn btn-primary" value="edit"></p>
+    </form>
+</div>
+</body>
+</html>
