@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+<body>
+<h3>List of book</h3>
+<table class="centered">
+    <thead>
+    <tr>
+        <th>name</th>
+        <th>author</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="book: ${books}">
+            <td th:text="${book.name}"/>
+            <td th:text="${book.author}"/>
+        </tr>
+    </tbody>
+</table>
+
+<form action="#" th:action="@{/}" th:object="${newbook}" method="post">
+    <p>name:<input type="text" th:field="*{name}"></p>
+    <p>author:<input type="text" th:field="*{author}"></p>
+    <p><input type="submit" value="add"><input type="reset" value="reset"></p>
+</form>
+
+</body>
+</html>
