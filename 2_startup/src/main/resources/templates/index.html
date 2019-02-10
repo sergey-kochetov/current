@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .validationError {
+        color:red;
+        }
+
+    </style>
 </head>
 <body>
 <h3 class="container centr">List of book</h3>
@@ -18,19 +24,29 @@
     </tr>
     </thead>
     <tbody>
-        <tr th:each="book: ${books}">
-            <td th:text="${book.name}"/>
-            <td th:text="${book.author}"/>
-            <td><a href="" th:href="@{'/' + ${book.id} + '/show'}">SHOW</a></td>
-            <td><a href="" th:href="@{'/' + ${book.id} + '/edit'}">EDIT</a></td>
-            <td><a href="" th:href="@{'/' + ${book.id} + '/delete'}">DELETE</a></td>
-        </tr>
+    <tr th:each="book: ${books}">
+        <td th:text="${book.name}"/>
+        <td th:text="${book.author}"/>
+        <td><a href="" th:href="@{'/' + ${book.id} + '/show'}">SHOW</a></td>
+        <td><a href="" th:href="@{'/' + ${book.id} + '/edit'}">EDIT</a></td>
+        <td><a href="" th:href="@{'/' + ${book.id} + '/delete'}">DELETE</a></td>
+    </tr>
     </tbody>
 </table>
 <div class="container centr">
-    <form action="#" th:action="@{/}" th:object="${newbook}" method="post">
-        <p>name:<input type="text" th:field="*{name}"></p>
-        <p>author:<input type="text" th:field="*{author}"></p>
+    <form action="#" th:action="@{/}" th:object="${book}" method="post">
+        <p>name:
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">Incorrect name</span>
+            <input type="text" th:field="*{name}"></p>
+
+        <p>author:
+            <span class="validationError"
+                  th:if="${#fields.hasErrors('author')}"
+                  th:errors="*{author}">Incorrect author</span>
+            <input type="text" th:field="*{author}"></p>
+
         <p><input type="submit" class="btn btn-primary" value="add">
             <input type="reset" class="btn btn-primary" value="reset"></p>
     </form>

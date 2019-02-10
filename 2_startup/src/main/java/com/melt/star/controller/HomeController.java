@@ -2,11 +2,14 @@ package com.melt.star.controller;
 
 import com.melt.star.model.Book;
 import com.melt.star.repo.BookRepository;
+import com.melt.star.service.BossService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -16,15 +19,25 @@ public class HomeController {
     @Autowired
     private BookRepository bookRepository;
 
+    @Autowired
+    private BossService bossService;
+
     @GetMapping
-    public String getIndex(Model model) {
+    public String getIndex(Model model, Book book) {
         model.addAttribute("books", bookRepository.findAll());
-        model.addAttribute("newbook", new Book());
+        if (book == null) {
+            book = new Book();
+        }
+        model.addAttribute("book", book);
+        //model.addAttribute("boss", bossService.getAnswerById("1").getData());
         return "index";
     }
 
     @PostMapping
-    public String addBook(Model model, Book book) {
+    public String addBook(@Valid Book book, Errors errors) {
+        if (errors.hasErrors()) {
+            return "index";
+        }
         bookRepository.save(book);
         return "redirect:/";
     }
@@ -58,7 +71,10 @@ public class HomeController {
     }
 
     @PostMapping("/{id}")
-    public String updateBook(@PathVariable("id") Long id, Book book) {
+    public String updateBook(@PathVariable("id") Long id, @Valid Book book, Errors errors) {
+        if (errors.hasErrors()) {
+            return "edit";
+        }
         bookRepository.save(book);
         return "redirect:/";
     }
