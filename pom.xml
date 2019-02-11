@@ -6,7 +6,11 @@
 
     <groupId>com.melt.crud</groupId>
     <artifactId>current</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>mongo</module>
+    </modules>
 
     <name>current</name>
     <description>Simple REST API application</description>
