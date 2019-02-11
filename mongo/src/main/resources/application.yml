@@ -1,0 +1,5 @@
+logging:
+  file: logs/mylog.log
+
+server:
+  port: 8081

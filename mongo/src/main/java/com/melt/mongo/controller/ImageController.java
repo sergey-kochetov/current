@@ -2,6 +2,7 @@ package com.melt.mongo.controller;
 
 import com.melt.mongo.domain.Image;
 import com.melt.mongo.repo.ImageRepo;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.io.InputStream;
 
 @Controller
 @RequestMapping("/image")
+@Slf4j
 public class ImageController {
 
     @Autowired
@@ -38,7 +40,7 @@ public class ImageController {
     @GetMapping("/{id}")
     public void renderImage(@PathVariable("id") String id, HttpServletResponse response) {
         response.setContentType("image/jpeg");
-        Image image = imageRepo.findById(Long.valueOf(id));
+        Image image = imageRepo.findById(Long.valueOf(id)).get();
 
         byte[] bytes = getBytesForLoad(image);
 
@@ -46,8 +48,10 @@ public class ImageController {
         try {
           IOUtils.copy(is, response.getOutputStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            log.info(e.getClass().getSimpleName() + "=" + e.getMessage());
+            throw new RuntimeException(e);
         }
+        log.info("Load images id#" + id);
     }
 
     private byte[] getBytesForLoad(Image image) {

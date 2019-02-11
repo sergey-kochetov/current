@@ -1,4 +1,4 @@
-package com.melt.mongo.controller;
+package com.melt.mongo.config;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
