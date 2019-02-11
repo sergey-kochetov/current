@@ -1,7 +1,5 @@
 package com.melt.mongo;
 
-import com.melt.mongo.domain.LanguageMongo;
-import com.melt.mongo.domain.LanguagePostgres;
 import com.melt.mongo.repo.LanguageMongoRepo;
 import com.melt.mongo.repo.LanguagePostgresRepo;
 import org.springframework.boot.CommandLineRunner;
