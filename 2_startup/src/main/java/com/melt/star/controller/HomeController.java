@@ -1,8 +1,10 @@
 package com.melt.star.controller;
 
 import com.melt.star.model.Book;
+import com.melt.star.model.user.Answer;
 import com.melt.star.repo.BookRepository;
 import com.melt.star.service.BossService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 @Controller
 @RequestMapping("/")
+@Slf4j
 public class HomeController {
 
     @Autowired
@@ -30,6 +36,19 @@ public class HomeController {
         }
         model.addAttribute("book", book);
         //model.addAttribute("boss", bossService.getAnswerById("1").getData());
+        Answer answer = null;
+        try {
+            answer = bossService.getAnswerByIdAsync("1").get(5, TimeUnit.SECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            log.error("TimeoutException=" + e.getMessage());
+            return "index";
+        }
+        model.addAttribute("boss", answer.getData());
+
         return "index";
     }
 

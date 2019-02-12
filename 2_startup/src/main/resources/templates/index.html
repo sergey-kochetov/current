@@ -51,5 +51,12 @@
             <input type="reset" class="btn btn-primary" value="reset"></p>
     </form>
 </div>
+
+<h3>Boss:</h3>
+<div th:if="${boss!=null}">
+    <p th:th:text="${boss.name}"></p>
+    <p th:text="${boss.power}"></p>
+</div>
+
 </body>
 </html>
