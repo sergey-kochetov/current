@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+</head>
+<body>
+<p th:if="${customer != 'anonymous'}">Hello ${customer}</p>
+
+<form th:if="${customer != 'anonymous'}" th:action="@{/logout}">
+    <input type="submit" value="logout">
+</form>
+
+<h2>Index Page</h2>
+<p><a th:href="@{/login}">login</a></p>
+<p><a th:href="@{/registration}">registration</a></p>
+<p><a th:href="@{/user}">user</a></p>
+<p><a th:href="@{/admin}">admin</a></p>
+
+</body>
+</html>
