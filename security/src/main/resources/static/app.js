@@ -25,3 +25,17 @@ function ping() {
     action('send:' + message);
     ws.send(message)
 }
+
+function actionSec(message) {
+    var output = document.getElementById('inscroll')
+    var newP = document.createElement('p');
+    newP.appendChild(document.createTextNode(message));
+    output.appendChild(newP);
+}
+
+window.onmousemove = function(e) {
+    var xx = ${document}.height()*.9 - e.y
+    if(xx < 0) {
+        ws.send("load");
+    }
+}
