@@ -5,9 +5,9 @@
     <title>Index Page</title>
 </head>
 <body>
-<p th:if="${customer != 'anonymous'}">Hello ${customer}</p>
+<p th:text="${customer}"></p>
 
-<form th:if="${customer != 'anonymous'}" th:action="@{/logout}">
+<form th:if="${customer != 'anonymous'}" th:action="@{/logout}" method="post">
     <input type="submit" value="logout">
 </form>
 
