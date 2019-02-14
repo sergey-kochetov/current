@@ -30,7 +30,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void delete(Long id) {
         log.info("IN CustomerServiceImpl delete {}", id);
-        customerRepository.delete(id);
+        customerRepository.deleteById(id);
     }
 
     @Override

@@ -10,8 +10,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>mongo</module>
-        <module>rest</module>
         <module>security</module>
+        <module>test</module>
     </modules>
 
     <name>current</name>

@@ -28,7 +28,7 @@ public class HomeControllerRest {
         if (bookMaybe.isPresent()) {
             return new ResponseEntity<>(bookMaybe.get(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new Book(), HttpStatus.NOT_FOUND);
     }
 
     @PostMapping(consumes = "aplication/jason")
