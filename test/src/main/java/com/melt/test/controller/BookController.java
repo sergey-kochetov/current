@@ -19,9 +19,9 @@ public class BookController {
         return "index";
     }
 
-    @GetMapping("/book")
+    @GetMapping("/books")
     public String getAllBook(Model model) {
-        model.addAttribute("books", bookService.getAllBook());
+        model.addAttribute("books", bookService.getAllBooks());
         return "books";
     }
 }

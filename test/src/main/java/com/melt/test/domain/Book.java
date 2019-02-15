@@ -27,6 +27,15 @@ public class Book {
         this.author = author;
     }
 
+    public Book(Long id, String name, String author) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        Timestamp time = new Timestamp(System.currentTimeMillis());
+        this.createTime = time;
+        this.updateTime = time;
+    }
+
     public Book() {
     }
 }
